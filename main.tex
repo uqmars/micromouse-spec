@@ -13,6 +13,9 @@
 \usepackage[margin=20mm]{geometry}
 \usepackage{datetime}
 \usepackage{hyperref}
+\usepackage{comment}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[shortlabels]{enumitem}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -64,12 +67,28 @@ node [inner sep=0,outer sep=0,above right]
 \begin{titlepage}
     \newgeometry{right=0mm,left=0mm,top=20mm,bottom=0mm}
     \begin{center}
+        \begin{figure}
+        
         \vspace*{15mm}
-        \includegraphics[width=0.7\paperwidth]{Assets/Logo (Dark).png} \\
+        \begin{center}
+            \includegraphics[width=0.7\paperwidth]{Assets/Logo (Dark).png} \\
+        \end{center}
+        
         \vspace{1cm}
-        \includegraphics[width=0.15\paperwidth]{Assets/IEEE_HKN_logo.png} \\
+        
+        \centering
+        \begin{minipage}{.5\textwidth}
+          \centering
+          \includegraphics[width=.35\linewidth]{Assets/IEEE_HKN_logo.png}
+        \end{minipage}%
+        \begin{minipage}{.5\textwidth}
+          \centering
+          \includegraphics[width=.60\linewidth]{Assets/HKN_Logo.jpg}
+        \end{minipage}
+        \end{figure}
+
         \vspace{1cm}
-        \Huge Micromouse Competition Specification \textcolor{red}{V1.1} \\
+        \Huge UQ Micromouse Competition Specification V2.0 \\
         \huge \textcolor{turbo_purple}{\today}
     \end{center}
     \vfill
@@ -91,19 +110,19 @@ node [inner sep=0,outer sep=0,above right]
 
 \section{Introduction}
 \vspace*{9mm}
-Micromouse is a robotics competition which has been run across the world since the 1970`s. In it, competitors are tasked with developing a small autonomous robotic \textit{mouse} that finds the quickest path to the centre of an $N\times N$ maze. In addition to this core challenge, there is an additional challenge for passing and avoiding \emph{gates}.
+Micromouse is a robotics competition that has been run across the world since the 1970s. In it, competitors are tasked with developing a small autonomous robotic \textit{mouse} that finds the quickest path to the centre of an $N\times N$ maze. The UQ Micromouse Competition offers an additional challenge: time bonuses and penalties for passing and avoiding \emph{gates}.
 
 \subsection{Important Details}
 \begin{enumerate}
     \item Each competitor will need to pay $\$5$AUD to enter.
-    \item Teams can calibrate their mouse on an example maze on the $\textrm{7}^\textrm{th}$ of December 2023.
-    \item The competition will be held on the $\textrm{8}^\textrm{th}$ of December 2023.
-    \item Team entries close on the \textcolor{red}{$\textrm{24}^\textrm{th}$ of November 2023} at 5pm AEST. Fees will be charged the following week.
+    \item Teams can calibrate their mouse on an example maze on the $\textrm{15}^\textrm{th}$ of February 2025.
+    \item The competition will be held on the $\textrm{16}^\textrm{th}$ of February 2025.
+    \item Team entries close on the $\textrm{1}^\textrm{th}$ of February 2025. Fees will be charged the following week.
 \end{enumerate}
 
 \begin{center}
     \begin{figure}[H]
-    \caption{Potential $9\times 9$ Maze}\label{fig:maze}
+    \caption{Potential $9\times 9$ Maze without gates}\label{fig:maze}
         \begin{center}
             \includegraphics[scale=0.3]{Assets/Maze2.png}
         \end{center}
@@ -115,19 +134,17 @@ Micromouse is a robotics competition which has been run across the world since t
 \section{Competition Rules}
 \subsection{Team Eligibility}
 \begin{enumerate}
-    \item All members of the team must fall into one of the following current enrollments:
+    \item All members of the team must fall into one of the following categories:
     \begin{enumerate}
-        \item Master`s student.
         \item Undergraduate University Student.
-        \item High School Student, provided they are accompanied by a teacher.
+        \item High School Students, provided a teacher accompanies them.
+        \item Open division. 
     \end{enumerate}
+    For a team comprised of members from more than one category, the team will be entered into the division of the most senior team member.
+    
     \item Teams may have a maximum of five official members.
-    \item Teams must register using the \href{https://forms.gle/P9X8jZgmrGdG6HyK7}{this link} and provide the following supporting evidence in their GitHub Repo:
-    \begin{enumerate}
-        \item The source code for their micromouse.
-        \item A design document in the form of a pdf.
-        \item A 5min video of the team discussing their design decisions made for the micromouse.
-    \end{enumerate}
+    \item Postal entries are permitted so long as the team organises an individual to operate the micromouse. This person must not be involved in the organisation or scoring of the event.
+    \item Teams must register using \href{https://forms.gle/iTWDovgiPXRiEg1i6}{this link} and provide the following supporting evidence in their publicly hosted version-controlled file repository (eg GitHub, GitLab, Bitbucket). More information can be found in Section \ref{documentation}.
     \item One mentor is allowed per team but cannot have significant input to the design of the micromouse.
 \end{enumerate}
 
@@ -135,14 +152,11 @@ Micromouse is a robotics competition which has been run across the world since t
 
 
 \begin{enumerate}
-    \item The total budget for the micromouse must not exceed $\$1,500$AUD. 
-    \begin{enumerate}
-        \item A list of components and their costs must be submitted with a copy of receipts must be sent with other documentation.
-    \end{enumerate}
-    \item The length and width of the mouse must both be under $16$cm.
+    \item The total budget for the micromouse must not exceed $\$1,500$AUD. Proof of this is covered in more detail in the 'Required Documentation' section (\ref{documentation})
+    \item The mouse's length and width must be under $16$cm.
     \item The height of the mouse must not exceed $8$cm.
     \item The mouse can only be powered via battery.
-    \item The mouse must be controlled via on-board system. External connection by any-means during a teams round will result in disqualification.
+    \item The mouse must be controlled via an on-board system. External connection by any means during a team's round will result in disqualification.
 \end{enumerate}
 
 \subsection{Maze Specification}
@@ -157,19 +171,22 @@ Micromouse is a robotics competition which has been run across the world since t
 
 \begin{enumerate}
     \item The maze will be made up of a $9\times 9$ unit grid, where each unit length will be $18$cm approx.
-    \item The maze will be comprised of wood.
+    \item The maze will be comprised of MDF wood.
     \begin{enumerate}
-        \item The walls and floor of the maze will be painted white.
-        \item Time altering sections will have RFID tags with specific hex codes in the centre of of the cell.
-        \item The maze will be $10$cm tall and $1.2$cm thick.
+        \item The walls of the maze will be painted white.
+        \item The floor of the maze will be painted black
+        \item The time gates will be either red or green plates secured to the floor. The thickness of each plate will be less than 1mm. Their colour will be very saturated.
+        \item The maze walls will be $10$cm tall and $1.2$cm thick.
         \item Passageways will be 16.8cm wide.
     \end{enumerate}
     \item The outside of the maze will be surrounded by a wall.
-    \item The mouse will start at one of four corners of the maze. 
+    \item The mouse will start at one of the four corners of the maze. 
     \begin{enumerate}
         \item When placed at the starting point, the outside walls will be to the left and behind the robot.
     \end{enumerate}
-    \item Maze dimensions will be accurate to $5\%$ or $2$mm, whichever is less.
+    \item Maze dimensions will be accurate to $5\%$ or $2$mm, whichever is less. This includes vertical distance (steps) between grid spaces.
+    \item "Floating" or "detached" walls which are not connected to the border should be expected
+    \item Do not make any assumptions about the lighting conditions of the maze.
 \end{enumerate}
 
 \newpage
@@ -181,44 +198,34 @@ Micromouse is a robotics competition which has been run across the world since t
 \begin{enumerate}
     \item No modifications may be made to the navigation algorithm of the mouse following the reveal of the maze on competition day.
     \item For each team's turn, they will be given three minutes with their mouse to make any adjustments/sensor calibrations. No details of the maze or its configuration should be entered into the mouse.
-    \item Teams will be allocated a window of 10 minutes to compete. This will begin with a three-minute calibration time. The micromouse will then be given seven-minutes to solve the maze\label{rule:time-limit}.
-    \item Teams may choose to end their calibration period early, but any remaining time will not be added onto the seven-minute window.
-    \item You may adjust the mouse between runs but this will be included in the time used in a teams seven-minute window.
-    \item A team's micromouse is allow up to 7 runs.
-    \begin{enumerate}
-        \item The quickest of these runs will be considered.
-    \end{enumerate}
+    \item Teams will be allocated a window of 10 minutes to compete. This will begin with a three-minute calibration time. The micromouse will then be given seven minutes to solve the maze\label{rule:time-limit}.
+    \item Teams may choose to end their calibration period early, but any remaining time will not be added to the seven-minute window.
+    \item You may adjust the mouse between runs, but this will be included in the time used in a team's seven-minute window.
+    \item A team's micromouse is allowed up to 7 runs. The quickest of these runs will be considered.
+    \item A run can be aborted at any time
     \item The run time (time to reach the centre) will start when the mouse has left its starting square and stop when it finds the centre.
-    \item No modifications should be made between runs which drastically alters the mouse's weight or profile during run time, such as removing sensor arrays or switching to lighter batteries.
+    \item No modifications should be made between runs that drastically alter the mouse's weight or profile during run time, such as removing sensor arrays or switching to lighter batteries.
     \begin{enumerate}
         \item Teams may be allowed to change batteries, adjust sensors, and make repairs between runs.
     \end{enumerate}
     \item The mouse may continue to map the maze once it has found the centre.
-    \item Do not make any assumptions about the lighting level in the room.
-    \item Nothing may be discarded by the robot (or leave a trail). This will lead to a disqualification.
+    \item If the mouse reaches the centre, a team member can then return it to the starting tile manually.
+    \item All items that enter the maze must make it to the centre tile for it to be counted as a successful run. This includes "bread crumbs" or markers.
     \item The mouse may not climb or fly over the walls of the maze.
     \item Any attempt to destroy walls/parts of the maze by either teams or the robot will lead to a disqualification.
     \item The team's mouse must be robotic. The use of live mice or rats will result in disqualification.
 \end{enumerate}
 
-\newpage
+\subsection{Gate Bonuses}
+Some tiles of the maze will be coloured green or red; these are called 'gates'. Green represents a time bonus, and red represents a time penalty. A coloured tile will consist of a plate that will be secured to the floor of the maze. The vertical step onto the plate will be less than 1mm.
 
-\section{Prizes}
 
-\subsection{Quickest Time Solving the $9\times 9$ Maze}
-The micromouse which is capable of finding the centre of the maze at the lowest time will be the winner of this challenge.
+\begin{enumerate}[a)]
+    \item If a mouse passes through a red gate, five seconds will be added to the time.
+    \item If a mouse passes through a green gate, three seconds will be subtracted from the time.
+\end{enumerate}
 
-\vspace*{-10mm}
-
-\subsection{Cheapest Micromouse Design}
-Though the budget is limited to $\$1,500$AUD, competitors will be awarded for designing the cheapest micromouse which is capable of finding the centre, so long as it is under the time given in \textit{Challenge Rules} \ref{rule:time-limit}.
-
-\vspace*{-10mm}
-
-\subsection{Passing and Avoiding Gates}
-The maze given for this challenge will be of the same $9\times 9$ grid as the \textit{Quickest Time Solving an $n\times n$ Maze} but with the addition of \textit{gates} to both prioritise and avoid. Figure \ref{fig:gated-maze} represents a maze with gates added; green to pass through and red to avoid. These gates are RFID tags with specific hex codes for each type. The hex code will be provided to the teams prior to the maze reveal. 
-
-\emph{Note: The ground will not be coloured. The depiction in Figure \ref{fig:gated-maze} is for conceptualisation only.}
+\emph{Note: The coloured square may not cover the entire tile. a small border around the outside may be required to attach the square. At least $90\%$ of the area will be covered. A possible gate layout can be seen in figure \ref{fig:gated-maze}}.
 
 \begin{center}
     \begin{figure}[H]
@@ -229,11 +236,32 @@ The maze given for this challenge will be of the same $9\times 9$ grid as the \t
     \end{figure}
 \end{center}
 
-This challenge has the following rules:
+
+\newpage
+
+
+\section{Challenges}
+
+\subsection{Quickest Time Solving the $9\times 9$ Maze}
+The micromouse which is capable of finding the centre of the maze in the lowest time, including time penalties and bonuses, will be the winner of this challenge.
+
+If two or more micromice do not make it to the centre, the ranking will be based on which mouse makes it closer to the centre (based on Manhattan distance), regardless of time.
+
+\vspace*{-10mm}
+
+\subsection{Cheapest Micromouse Design}
+Though the budget is limited to $\$1,500$AUD, competitors will be awarded for designing the cheapest micromouse which is capable of finding the centre, so long as it is under the time given in \textit{Challenge Rules} \ref{rule:time-limit}.
+
+\vspace*{12mm}
+
+\section{Required Documentation} \label{documentation}
+\vspace*{12mm}
+Several items of documentation are required for a team to compete.
 \begin{enumerate}
-    \item If a mouse passes through a red gate five-seconds will be added to their time.
-    \item If a mouse passes through a green gate three-seconds will be deducted from their time.
-    \item The mouse with the fastest time with the gates accounted for will be the winner.
+    \item The source code. This includes the files containing any code that is required for the operation of a team's micromouse (this includes calibration programs).
+    \item A PDF containing details about the design of the micromouse. This should include images of the micromouse, CAD models, circuit schematics, algorithm flowcharts, etc., if applicable. 
+    This document must also include a list of the prices of all items purchased and used for the micromouse, including references such as receipts. If you already owned a part or were donated parts, include the estimated cost for that part. This is to ensure the \$ 1500 budget is not exceeded
+    \item A video no longer than 5 minutes to explain the design and the design decisions made along the way. Try to focus on the unique elements of your micromouse, even if they don't work out in the end.
 \end{enumerate}
 
 \newpage
@@ -242,37 +270,25 @@ This challenge has the following rules:
 \begin{enumerate}
     \item When will this be held?
     \begin{enumerate}
-	\item The $\textrm{7}^\textrm{th}$ and $\textrm{8}^\textrm{th}$ of December 2023
+	\item The $\textrm{15}^\textrm{th}$ and $\textrm{16}^\textrm{th}$ of February 2025
     \end{enumerate}
     \item Why is there a cost of entry
     \begin{enumerate}
         \item The cost of entry is to assist in covering costs of running the competition.
     \end{enumerate}
-    \item \textcolor{red}{Can we use a kit for our micromouse?}
+    \item Can we use a kit for our micromouse?
     \begin{enumerate}
-        \item \textcolor{red}{Yes, so long as it's within the maximum allowed budget for entry. However, entries using kits will not be considered for the prize for cheapest build.}
+        \item Yes, so long as it's within the maximum allowed budget for entry. However, entries using kits will not be considered for the prize for cheapest build.
     \end{enumerate}
 \end{enumerate}
 
-\newpage
-\section{Changes}
-\vspace*{12mm}
-\begin{itemize}
-    \item \textcolor{red}{Added IEEE Mu Kappa as collaborator}
-    \item \textcolor{red}{Added responses to F.A.Q}
-    \item \textcolor{red}{Updated registration date}
-\end{itemize}
+%\newpage
+%\section{Changes}
+%\vspace*{12mm}
 
-\newpage
-\section{Sponsors}
-\vspace*{9mm}
+%\newpage
+%\section{Sponsors}
+%\vspace*{9mm}
 
-This event would not be possible without the wonderful support of our lovely sponsors at Jaycar and BPEQ.
-
-\begin{center}
-\includegraphics[width=0.8\linewidth]{./Assets/Jaycar-Logo.png}
-
-\includegraphics[width=0.8\linewidth]{./Assets/BPEQ-Logo-Web.png}
-\end{center}
 
 \end{document}
