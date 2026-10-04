@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+
+
+\fancyhf{}
+\lhead{\includegraphics[width=0.3\textwidth]{MARS-logo.png}}
+\rhead{MicroMouse Specification 2021}
+\fancyfoot[CE,CO]{\thepage}
+
+\title{MicroMouse Specification\\ \large Version 1.1}
+\author{UQ Mechatronics and Robotics Society}
+\date{Released 26/06/2021}
+
+\pagestyle{fancy}
+
+\begin{document}
+
+\maketitle
+\includegraphics[width=\textwidth]{MARS-logo.png}
+\section*{Introduction}
+MicroMouse is a classic robotics competition in which an autonomous robotic mouse finds the fastest path to the centre of a square maze. The maze layout is unknown before the competition. Therefore, the mouse must be programmed to initially map the maze, starting from one corner and finding an optimum path to the centre. The team whose mouse can get to the centre of the maze in the fastest time will win. 
+
+\section*{Team Eligibility and Formation}
+To participate, each team member needs to be enrolled in a university/tertiary education institution. Students from all year levels are welcome to participate. Team members do not need to be from the same university/institute. Each team should have a maximum of 5 members. 
+
+\section*{Competition Rules}
+%How many runs are allowed?
+\begin{itemize}
+    \item The deadline for MicroMouse submission will be 9AM on Saturday 27/11/21, the same day as the competition. 
+    \item You must submit the code programmed onto your MicroMouse at the same time as submission.
+    \item No modifications may be made to the navigation algorithm of the mouse following the reveal of the maze on competition day.
+    \item For each team's turn, they will have three minutes with their mouse to make any adjustments/sensor calibrations. No details of the maze or its configuration should be entered into the mouse. 
+    \item Teams will be allocated a window of 10 minutes to compete. This will begin with a 3 minute calibration time. The MicroMouse will then be given 7 minutes to solve the maze. 
+    \item Teams may choose to end their calibration period early, however this remaining time will not be added onto the 7-minute run window. 
+    \item You may adjust the mouse between runs but this will be included in the 7 minutes. 
+    \item The MicroMouse will be allowed to make a maximum of 7 runs.
+    \item The run time (time to get to the centre of the maze) will start when the mouse has left its starting square and stop when it finds the centre.
+    \item The starting procedure of the mouse must be simple and not offer any strategic options to the team; the mouse is autonomous and must make these decisions for itself. For example, if the maze has been completely mapped and the mouse is to make a fast run to the centre, this must be decided by the mouse itself.
+    \item No modifications should be made between runs which drastically alter the mouse's weight or profile during run time, such as removing sensor arrays or switching to lighter batteries. 
+    \item However, teams will be allowed to change batteries, adjust sensors, and make repairs between runs.
+    \item The mouse may continue to map the maze once it has found the centre.
+    \item Do not make any assumptions about the lighting level in the room. 
+    \item Nothing may be discarded by the robot (or leave a trail). This will lead to a disqualification.
+    \item The mouse may not climb nor fly over the walls of the maze (and therefore no drones or UAVs will be permitted to compete).
+    \item Any attempt to destroy walls/parts of the maze by either teams or the robot will lead to a disqualification.
+    \item A team's solution must be robotic. Live mice will not be allowed to compete.
+\end{itemize}
+\section*{Maze Specification}
+%Same size as the one from Mumbai
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Maze Cross-Section.png}
+    \caption{Maze cross-section}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{itemize}
+    \item The maze will be made up of a 16x16 unit grid, where each unit length will be 18cm approx. 
+    \item The maze will be made of wood. 
+    \item The walls of the maze will be 5cm high and 1.2cm thick. Passageways between walls will therefore be 16.8cm wide.
+    \item The outside of the maze will be surrounded by a wall. 
+    \item The side of the walls will be white and the floor will be black.
+    \item The mouse will start in one of four corners of the maze. When placed at the starting point, the outside walls will be to the left and behind the robot. 
+    \item The centre goal will be an large opening comprised of 4 unit squares (2x2).
+    \item Maze dimensions will be accurate to 5\% or 2cm, whichever is less
+\end{itemize}
+
+\section*{MicroMouse Specification}
+\begin{itemize}
+    \item The mouse must be smaller than 16x16cm. Participants should consider the size of their mice carefully and whether it will be able to successfully maneuver the maze.
+    \item Mice must not utilize combustion or nuclear power sources.
+    \item The height of the MicroMouse must be under 100cm.
+    \item Mice must be controlled by on-board systems. No internet connections or wireless communication is allowed during a run
+    \item The mouse must be autono-mouse ;)
+    
+\end{itemize}
+
+\section*{Judging}
+
+\begin{itemize}
+    \item Marks will be awarded based off the effectiveness of the mouse to reach the centre, as well as build quality. 
+    \item Teams which reach the centre of the maze will be scored off timing. Teams which fail to reach the centre will be scored by distance achieved and purpose in navigation algorithm. 
+    \item If the mouse is touched during an active run, the mouse must be re-positioned to the starting cell. 
+    \item If judges determine that a mouse is likely to damage the maze or believe it may pose a safety risk, judges may bar the mouse from competing. This may include include interrupting an active run. 
+    \item Judges decisions are final.
+    %\item Judging will be conducted by the UQ MARS Executive Team on the day.
+\end{itemize}
+
+\end{document}
+
