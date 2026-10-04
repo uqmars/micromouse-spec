@@ -96,7 +96,7 @@ node [inner sep=0,outer sep=0,above right]
         \end{figure}
 
         \vspace{1cm}
-        \Huge UQ Micromouse Competition 2026 \\ Specification V3.0
+        \Huge UQ Micromouse Competition 2026 \\ Specification V4.0
     \end{center}
     \vfill
     \includegraphics[height=0.3\paperheight, right]{Assets/Pattern - PCB (Solid).png}
@@ -116,19 +116,19 @@ node [inner sep=0,outer sep=0,above right]
 
 \section{Introduction}
 %\vspace*{9mm}
-Micromouse is a robotics competition that has been run across the world since the 1970s. In it, competitors are tasked with developing a small autonomous robotic \textit{mouse} that finds the quickest path to the centre of an $N\times N$ maze. The UQ Micromouse Competition offers an additional challenge: time bonuses and penalties for passing and avoiding \emph{gates}.
+Micromouse is a robotics competition that has been run across the world since the 1970s. In it, competitors are tasked with developing a small autonomous robotic \textit{mouse} that finds the quickest path to the centre of an $N\times N$ maze. %The UQ Micromouse Competition offers an additional challenge: time bonuses and penalties for passing and avoiding \emph{gates}.
 
 \subsection{Important Details}
 \begin{enumerate}
-    \item Teams can calibrate their mouse on an example maze on the $7^{th}$ Feburary 2026.
-    \item The competition will be held on the $8^{th}$ Feburary 2026
-    \item Team entries close on the $1^{st}$ Feburary 2026.
+    \item Teams can calibrate their mouse on an example maze on the $3^{rd}$ October 2026.
+    \item The competition will be held on the $4^{th}$ October 2026
+    \item Team entries close on the $27^{th}$ September 2026.
     \item Competition entry is free.
 \end{enumerate}
 
 \begin{center}
     \begin{figure}[H]
-    \caption{Potential $9\times 9$ Maze without gates}\label{fig:maze}
+    \caption{Potential $9\times 9$ Maze}\label{fig:maze}
         \begin{center}
             \includegraphics[scale=0.2]{Assets/Maze2.png}
         \end{center}
@@ -182,7 +182,7 @@ Micromouse is a robotics competition that has been run across the world since th
     \begin{enumerate}
         \item The walls of the maze will be painted white.
         \item The floor of the maze will be painted black
-        \item The time gates will be either red or green plates secured to the floor. The thickness of each plate will be less than 1mm. Their colour will be very saturated. See section \ref{gate_bonuses} for more details.
+        %\item The time gates will be either red or green plates secured to the floor. The thickness of each plate will be less than 1mm. Their colour will be very saturated. See section \ref{gate_bonuses} for more details.
         \item The maze walls will be $10$cm tall and $1.2$cm thick.
         \item Passageways will be 16.8cm wide.
     \end{enumerate}
@@ -213,7 +213,7 @@ Micromouse is a robotics competition that has been run across the world since th
     
     %\item Teams may choose to end their calibration period early, but any remaining time will not be added to the seven-minute window.
     
-    \item You may adjust the mouse between runs, but this will be included in the time used in a team's seven-minute window.
+    \item You may adjust the mouse between runs, but this will be included in the time used in a team's 10-minute window.
     
     \item A team's micromouse is allowed up to 7 runs. Only the highest-scoring run will be considered.
     
@@ -231,29 +231,29 @@ Micromouse is a robotics competition that has been run across the world since th
     \item The team's mouse must be robotic. The use of live mice or rats will result in disqualification.
 \end{enumerate}
 
-\newpage
-\section{Gate Bonuses} \label{gate_bonuses}
+% \newpage
+% \section{Gate Bonuses} \label{gate_bonuses}
 
-Some tiles of the maze will be coloured green or red; these are called 'gates'. Green represents a time bonus, and red represents a time penalty. A coloured tile will consist of a plate that will be secured to the floor of the maze. The vertical step onto the plate will be less than 1mm.
-
-
-\begin{enumerate}[a)]
-    \item If a mouse passes through a red gate, five seconds will be added to the time.
-    \item If a mouse passes through a green gate, three seconds will be subtracted from the time.
-    \item Each gate bonus can only be applied once per run. This means that should the mouse pass over the same gate twice in a run, its time bonus/penalty will only be applied once.
-\end{enumerate}
+% Some tiles of the maze will be coloured green or red; these are called 'gates'. Green represents a time bonus, and red represents a time penalty. A coloured tile will consist of a plate that will be secured to the floor of the maze. The vertical step onto the plate will be less than 1mm.
 
 
-\emph{Note: The coloured square may not cover the entire tile. a small border around the outside may be required to attach the square. At least $90\%$ of the area will be covered. A possible gate layout can be seen in figure \ref{fig:gated-maze}}.
+% \begin{enumerate}[a)]
+%     \item If a mouse passes through a red gate, five seconds will be added to the time.
+%     \item If a mouse passes through a green gate, three seconds will be subtracted from the time.
+%     \item Each gate bonus can only be applied once per run. This means that should the mouse pass over the same gate twice in a run, its time bonus/penalty will only be applied once.
+% \end{enumerate}
 
-\begin{center}
-    \begin{figure}[H]
-    \caption{Potential $9\times 9$ Maze with Added Gates}\label{fig:gated-maze}
-        \begin{center}
-            \includegraphics[scale=0.35]{Assets/Gated-Maze.png}
-        \end{center}
-    \end{figure}
-\end{center}
+
+% \emph{Note: The coloured square may not cover the entire tile. a small border around the outside may be required to attach the square. At least $90\%$ of the area will be covered. A possible gate layout can be seen in figure \ref{fig:gated-maze}}.
+
+% \begin{center}
+%     \begin{figure}[H]
+%     \caption{Potential $9\times 9$ Maze with Added Gates}\label{fig:gated-maze}
+%         \begin{center}
+%             \includegraphics[scale=0.35]{Assets/Gated-Maze.png}
+%         \end{center}
+%     \end{figure}
+% \end{center}
 
 
 \newpage
@@ -271,7 +271,7 @@ Some tiles of the maze will be coloured green or red; these are called 'gates'. 
         \begin{equation}\label{eqn:scoring}
             score=N_{tiles\_away}\cdot 25 + T
         \end{equation}
-        Where $T$ is the time in seconds to reach the location $N_{tiles \space away}$, this is measured as the fewest number of tiles the mouse would have to travel to reach the centre (ignoring any gate bonuses/penalties). 
+        Where $T$ is the time in seconds to reach the location $N_{tiles \space away}$, this is measured as the fewest number of tiles the mouse would have to travel to reach the centre. % (ignoring any gate bonuses/penalties). 
 
     \end{itemize}
 
@@ -313,7 +313,7 @@ Several items of documentation are required for a team to compete.
 \begin{enumerate}
     \item When will this be held?
     \begin{itemize}
-	\item The competition day is $8^{th}$ Feburary 2026. There is a testing and tuning day on $8^{th}$ Feburary 2026. This is a casual opportunity to test your system. There will be limited time for testing during the competition day.
+	\item The competition day is $4^{th}$ October 2026. There is a testing and tuning day on $3^{rd}$ October 2026. This is a casual opportunity to test your system. There will be limited time for testing during the competition day.
     \end{itemize}
     \item Entry fee?
     \begin{itemize}
@@ -325,6 +325,14 @@ Several items of documentation are required for a team to compete.
     \end{itemize}
 \end{enumerate}
 
+\newpage
+\section{Change log}
+
+Changes from version 3.0 (Feburary 2026 Compeitition) to version 4.0 (October 2026 Competition):
+\begin{enumerate}
+    \item Removed gate bonuses
+    \item Changed the competition dates.
+\end{enumerate}
 
 
 
