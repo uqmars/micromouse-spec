@@ -1,93 +1,263 @@
-\documentclass{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[sfdefault]{roboto}
+
+\usepackage{titling}
 \usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{fontawesome}
+\usepackage{setspace}
+\usepackage[export]{adjustbox}
+\usepackage[margin=20mm]{geometry}
+\usepackage{datetime}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+\urlstyle{same}
+
+\usepackage{xcolor}
+\definecolor{turbo_purple}{RGB}{112,105,160}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\normalfont\huge\bfseries\centering}{}{1em}{}
+\titleformat{\subsection}[display]{\normalfont\Large\bfseries\color{turbo_purple}}{}{1em}{}
+\titleformat{\subsubsection}[display]{\normalfont\large\bfseries}{}{}{\vspace{-1.2em}}[\vspace{-0.9em}]
+
 \usepackage{fancyhdr}
-\usepackage[english]{babel}
-
-
-\fancyhf{}
-\lhead{\includegraphics[width=0.3\textwidth]{MARS-logo.png}}
-\rhead{MicroMouse Specification 2021}
-\fancyfoot[CE,CO]{\thepage}
-
-\title{MicroMouse Specification\\ \large Version 1.1}
-\author{UQ Mechatronics and Robotics Society}
-\date{Released 26/06/2021}
-
 \pagestyle{fancy}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tikzpagenodes}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{25pt}
+\rhead{\begin{tikzpicture}[remember picture,overlay]
+\draw  let \p1=($(current page.north)-(current page header area.south)$),
+      \n1={veclen(\x1,\y1)} in
+node [inner sep=0,outer sep=0,below left] 
+      at (current page.north east){\includegraphics[height=\n1]{Assets/Sponsorship Header - Solid.png}};
+\end{tikzpicture}}
+\lfoot{\begin{tikzpicture}[remember picture,overlay]
+\draw  let \p1=($(current page footer area.north)-(current page.south)$),
+      \n1={veclen(\x1,\y1)} in
+node [inner sep=0,outer sep=0,above right] 
+      at (current page.south west){\includegraphics[height=\n1]{Assets/Sponsorship Footer - Solid.png}};
+\end{tikzpicture}}
+\cfoot{\sffamily\selectfont\thepage}
+
+%\usepackage[hidelinks]{hyperref}
+%\hypersetup{colorlinks=true}
+
+
+
 
 \begin{document}
 
-\maketitle
-\includegraphics[width=\textwidth]{MARS-logo.png}
-\section*{Introduction}
-MicroMouse is a classic robotics competition in which an autonomous robotic mouse finds the fastest path to the centre of a square maze. The maze layout is unknown before the competition. Therefore, the mouse must be programmed to initially map the maze, starting from one corner and finding an optimum path to the centre. The team whose mouse can get to the centre of the maze in the fastest time will win. 
+\begin{titlepage}
+    \newgeometry{right=0mm,left=0mm,top=20mm,bottom=0mm}
+    \begin{center}
+        \vspace*{15mm}
+        \includegraphics[width=0.7\paperwidth]{Assets/Logo (Dark).png} \\
+        \vspace{1cm}
+        \Huge Micromouse Competition Specification V1.0 \\
+        \huge \textcolor{turbo_purple}{\today}
+    \end{center}
+    \vfill
+    \includegraphics[height=0.5\paperheight, right]{Assets/Pattern - PCB (Solid).png}
+    \vspace*{10mm}
+\end{titlepage}
+\restoregeometry
+\vspace*{9mm}
+\tableofcontents
 
-\section*{Team Eligibility and Formation}
-To participate, each team member needs to be enrolled in a university/tertiary education institution. Students from all year levels are welcome to participate. Team members do not need to be from the same university/institute. Each team should have a maximum of 5 members. 
+\titlespacing*{\section}
+{0pt}{0ex}{-4ex}
+\titlespacing*{\subsection}
+{0pt}{0ex}{0ex}
+\titlespacing*{\subsubsection}
+{0pt}{0ex}{0ex}
 
-\section*{Competition Rules}
-%How many runs are allowed?
-\begin{itemize}
-    \item The deadline for MicroMouse submission will be 9AM on Saturday 27/11/21, the same day as the competition. 
-    \item You must submit the code programmed onto your MicroMouse at the same time as submission.
+\newpage
+
+\section{Introduction}
+\vspace*{9mm}
+Micromouse is a robotics competition which has been run across the world since the 1970`s. In it, competitors are tasked with developing a small autonomous robotic \textit{mouse} that finds the quickest path to the centre of an $N\times N$ maze. In addition to this core challenge, there is an additional challenge for passing and avoiding \emph{gates}.
+
+\subsection{Important Details}
+\begin{enumerate}
+    \item Each competitor will need to pay $\$5$AUD to enter.
+    \item Teams can calibrate their mouse on an example maze on the $\textrm{7}^\textrm{th}$ of December 2023.
+    \item The competition will be held on the $\textrm{8}^\textrm{th}$ of December 2023.
+    \item Team entries close on the $\textrm{10}^\textrm{th}$ of November 2023 at 5pm AEST. Fees will be charged the following week.
+\end{enumerate}
+
+\begin{center}
+    \begin{figure}[H]
+    \caption{Potential $9\times 9$ Maze}\label{fig:maze}
+        \begin{center}
+            \includegraphics[scale=0.3]{Assets/Maze2.png}
+        \end{center}
+    \end{figure}
+\end{center}
+
+\newpage
+
+\section{Competition Rules}
+\subsection{Team Eligibility}
+\begin{enumerate}
+    \item All members of the team must fall into one of the following current enrollments:
+    \begin{enumerate}
+        \item Master`s student.
+        \item Undergraduate University Student.
+        \item High School Student, provided they are accompanied by a teacher.
+    \end{enumerate}
+    \item Teams may have a maximum of five official members.
+    \item Teams must register using the \href{https://forms.gle/P9X8jZgmrGdG6HyK7}{this link} and provide the following supporting evidence in their GitHub Repo:
+    \begin{enumerate}
+        \item The source code for their micromouse.
+        \item A design document in the form of a pdf.
+        \item A 5min video of the team discussing their design decisions made for the micromouse.
+    \end{enumerate}
+    \item One mentor is allowed per team but cannot have significant input to the design of the micromouse.
+\end{enumerate}
+
+\subsection{Mircomouse Specifications}
+
+
+\begin{enumerate}
+    \item The total budget for the micromouse must not exceed $\$1,500$AUD. 
+    \begin{enumerate}
+        \item A list of components and their costs must be submitted with a copy of receipts must be sent with other documentation.
+    \end{enumerate}
+    \item The length and width of the mouse must both be under $16$cm.
+    \item The height of the mouse must not exceed $8$cm.
+    \item The mouse can only be powered via battery.
+    \item The mouse must be controlled via on-board system. External connection by any-means during a teams round will result in disqualification.
+\end{enumerate}
+
+\subsection{Maze Specification}
+\begin{center}
+    \begin{figure}[H]
+    \caption{Maze Wall Specification}\label{fig:maze-spec}
+        \begin{center}
+            \includegraphics[scale=0.5]{Assets/Maze-spec.png}
+        \end{center}
+    \end{figure}
+\end{center}
+
+\begin{enumerate}
+    \item The maze will be made up of a $9\times 9$ unit grid, where each unit length will be $18$cm approx.
+    \item The maze will be comprised of wood.
+    \begin{enumerate}
+        \item The walls and floor of the maze will be painted white.
+        \item Time altering sections will have RFID tags with specific hex codes in the centre of of the cell.
+        \item The maze will be $10$cm tall and $1.2$cm thick.
+        \item Passageways will be 16.8cm wide.
+    \end{enumerate}
+    \item The outside of the maze will be surrounded by a wall.
+    \item The mouse will start at one of four corners of the maze. 
+    \begin{enumerate}
+        \item When placed at the starting point, the outside walls will be to the left and behind the robot.
+    \end{enumerate}
+    \item Maze dimensions will be accurate to $5\%$ or $2$mm, whichever is less.
+\end{enumerate}
+
+\newpage
+\section{Challenge Rules}
+\vspace*{12mm}
+\begin{center}
+    \emph{Rules are subject to change with notice provided to given emails.}
+\end{center}
+\begin{enumerate}
     \item No modifications may be made to the navigation algorithm of the mouse following the reveal of the maze on competition day.
-    \item For each team's turn, they will have three minutes with their mouse to make any adjustments/sensor calibrations. No details of the maze or its configuration should be entered into the mouse. 
-    \item Teams will be allocated a window of 10 minutes to compete. This will begin with a 3 minute calibration time. The MicroMouse will then be given 7 minutes to solve the maze. 
-    \item Teams may choose to end their calibration period early, however this remaining time will not be added onto the 7-minute run window. 
-    \item You may adjust the mouse between runs but this will be included in the 7 minutes. 
-    \item The MicroMouse will be allowed to make a maximum of 7 runs.
-    \item The run time (time to get to the centre of the maze) will start when the mouse has left its starting square and stop when it finds the centre.
-    \item The starting procedure of the mouse must be simple and not offer any strategic options to the team; the mouse is autonomous and must make these decisions for itself. For example, if the maze has been completely mapped and the mouse is to make a fast run to the centre, this must be decided by the mouse itself.
-    \item No modifications should be made between runs which drastically alter the mouse's weight or profile during run time, such as removing sensor arrays or switching to lighter batteries. 
-    \item However, teams will be allowed to change batteries, adjust sensors, and make repairs between runs.
+    \item For each team's turn, they will be given three minutes with their mouse to make any adjustments/sensor calibrations. No details of the maze or its configuration should be entered into the mouse.
+    \item Teams will be allocated a window of 10 minutes to compete. This will begin with a three-minute calibration time. The micromouse will then be given seven-minutes to solve the maze\label{rule:time-limit}.
+    \item Teams may choose to end their calibration period early, but any remaining time will not be added onto the seven-minute window.
+    \item You may adjust the mouse between runs but this will be included in the time used in a teams seven-minute window.
+    \item A team's micromouse is allow up to 7 runs.
+    \begin{enumerate}
+        \item The quickest of these runs will be considered.
+    \end{enumerate}
+    \item The run time (time to reach the centre) will start when the mouse has left its starting square and stop when it finds the centre.
+    \item No modifications should be made between runs which drastically alters the mouse's weight or profile during run time, such as removing sensor arrays or switching to lighter batteries.
+    \begin{enumerate}
+        \item Teams may be allowed to change batteries, adjust sensors, and make repairs between runs.
+    \end{enumerate}
     \item The mouse may continue to map the maze once it has found the centre.
-    \item Do not make any assumptions about the lighting level in the room. 
+    \item Do not make any assumptions about the lighting level in the room.
     \item Nothing may be discarded by the robot (or leave a trail). This will lead to a disqualification.
-    \item The mouse may not climb nor fly over the walls of the maze (and therefore no drones or UAVs will be permitted to compete).
+    \item The mouse may not climb or fly over the walls of the maze.
     \item Any attempt to destroy walls/parts of the maze by either teams or the robot will lead to a disqualification.
-    \item A team's solution must be robotic. Live mice will not be allowed to compete.
-\end{itemize}
-\section*{Maze Specification}
-%Same size as the one from Mumbai
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{Maze Cross-Section.png}
-    \caption{Maze cross-section}
-    \label{fig:my_label}
-\end{figure}
+    \item The team's mouse must be robotic. The use of live mice or rats will result in disqualification.
+\end{enumerate}
 
-\begin{itemize}
-    \item The maze will be made up of a 16x16 unit grid, where each unit length will be 18cm approx. 
-    \item The maze will be made of wood. 
-    \item The walls of the maze will be 5cm high and 1.2cm thick. Passageways between walls will therefore be 16.8cm wide.
-    \item The outside of the maze will be surrounded by a wall. 
-    \item The side of the walls will be white and the floor will be black.
-    \item The mouse will start in one of four corners of the maze. When placed at the starting point, the outside walls will be to the left and behind the robot. 
-    \item The centre goal will be an large opening comprised of 4 unit squares (2x2).
-    \item Maze dimensions will be accurate to 5\% or 2cm, whichever is less
-\end{itemize}
+\newpage
 
-\section*{MicroMouse Specification}
-\begin{itemize}
-    \item The mouse must be smaller than 16x16cm. Participants should consider the size of their mice carefully and whether it will be able to successfully maneuver the maze.
-    \item Mice must not utilize combustion or nuclear power sources.
-    \item The height of the MicroMouse must be under 100cm.
-    \item Mice must be controlled by on-board systems. No internet connections or wireless communication is allowed during a run
-    \item The mouse must be autono-mouse ;)
-    
-\end{itemize}
+\section{Prizes}
 
-\section*{Judging}
+\subsection{Quickest Time Solving the $9\times 9$ Maze}
+The micromouse which is capable of finding the centre of the maze at the lowest time will be the winner of this challenge.
 
-\begin{itemize}
-    \item Marks will be awarded based off the effectiveness of the mouse to reach the centre, as well as build quality. 
-    \item Teams which reach the centre of the maze will be scored off timing. Teams which fail to reach the centre will be scored by distance achieved and purpose in navigation algorithm. 
-    \item If the mouse is touched during an active run, the mouse must be re-positioned to the starting cell. 
-    \item If judges determine that a mouse is likely to damage the maze or believe it may pose a safety risk, judges may bar the mouse from competing. This may include include interrupting an active run. 
-    \item Judges decisions are final.
-    %\item Judging will be conducted by the UQ MARS Executive Team on the day.
-\end{itemize}
+\vspace*{-10mm}
+
+\subsection{Cheapest Micromouse Design}
+Though the budget is limited to $\$1,500$AUD, competitors will be awarded for designing the cheapest micromouse which is capable of finding the centre, so long as it is under the time given in \textit{Challenge Rules} \ref{rule:time-limit}.
+
+\vspace*{-10mm}
+
+\subsection{Passing and Avoiding Gates}
+The maze given for this challenge will be of the same $9\times 9$ grid as the \textit{Quickest Time Solving an $n\times n$ Maze} but with the addition of \textit{gates} to both prioritise and avoid. Figure \ref{fig:gated-maze} represents a maze with gates added; green to pass through and red to avoid. These gates are RFID tags with specific hex codes for each type. The hex code will be provided to the teams prior to the maze reveal. 
+
+\emph{Note: The ground will not be coloured. The depiction in Figure \ref{fig:gated-maze} is for conceptualisation only.}
+
+\begin{center}
+    \begin{figure}[H]
+    \caption{Potential $9\times 9$ Maze with Added Gates}\label{fig:gated-maze}
+        \begin{center}
+            \includegraphics[scale=0.35]{Assets/Gated-Maze.png}
+        \end{center}
+    \end{figure}
+\end{center}
+
+This challenge has the following rules:
+\begin{enumerate}
+    \item If a mouse passes through a red gate five-seconds will be added to their time.
+    \item If a mouse passes through a green gate three-seconds will be deducted from their time.
+    \item The mouse with the fastest time with the gates accounted for will be the winner.
+\end{enumerate}
+
+\newpage
+\section{F.A.Q}
+\vspace*{12mm}
+\begin{enumerate}
+    \item When will this be held?
+    \begin{enumerate}
+	\item The $\textrm{7}^\textrm{th}$ and $\textrm{8}^\textrm{th}$ of December 2023
+    \end{enumerate}
+    \item Why is there a cost of entry
+    \begin{enumerate}
+        \item The cost of entry is to assist in covering costs of running the competition.
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+\section{Sponsors}
+\vspace*{9mm}
+
+This event would not be possible without the wonderful support of our lovely sponsors at Jaycar and BPEQ.
+
+\begin{center}
+\includegraphics[width=0.8\linewidth]{./Assets/Jaycar-Logo.png}
+
+\includegraphics[width=0.8\linewidth]{./Assets/BPEQ-Logo-Web.png}
+\end{center}
 
 \end{document}
-
