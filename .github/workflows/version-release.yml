@@ -1,0 +1,56 @@
+name: Release rules
+
+on:
+  push:
+    branches: [master]
+    paths: [config.toml]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version
+        id: ver
+        run: echo "version=$(make -s version)" >> "$GITHUB_OUTPUT"
+
+      - name: Check if release exists
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v${{ steps.ver.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Read release metadata
+        if: steps.check.outputs.exists == 'false'
+        id: meta
+        run: |
+          echo "name=$(yq -p toml '.release.name' config.toml)" >> "$GITHUB_OUTPUT"
+          yq -p toml '.release.description' config.toml > release-body.md
+
+      - name: Build PDF with make
+        if: steps.check.outputs.exists == 'false'
+        uses: xu-cheng/texlive-action@v3
+        with:
+          run: |
+            apk add --no-cache make
+            make VERSION=${{ steps.ver.outputs.version }}
+
+      - name: Create release
+        if: steps.check.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.ver.outputs.version }}
+          name: ${{ steps.meta.outputs.name }}
+          body_path: release-body.md
+          generate_release_notes: true
+          files: Micromouse_Spec_v${{ steps.ver.outputs.version }}.pdf
+          fail_on_unmatched_files: true

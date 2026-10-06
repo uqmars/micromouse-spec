@@ -1,4 +1,6 @@
 [release]
 	version = "4.0.0"
 	name = "2026b Competition Rules"
-	description = "Competition rules for the competition held in October, 2026."
+	description = """
+	Competition rules for the competition held in October, 2026.
+	"""
