@@ -67,8 +67,12 @@ node [inner sep=0,outer sep=0,above right]
 %\usepackage[hidelinks]{hyperref}
 %\hypersetup{colorlinks=true}
 
-
-
+% Used to dynamicly pull version from config file
+\usepackage{etoolbox}
+\InputIfFileExists{version.tex}{}{
+	\newcommand\rulesversion{0.0.0}
+}
+% =====
 
 \begin{document}
 
@@ -96,7 +100,7 @@ node [inner sep=0,outer sep=0,above right]
         \end{figure}
 
         \vspace{1cm}
-        \Huge UQ Micromouse Competition 2026 \\ Specification V4.0
+        \Huge UQ Micromouse Competition 2026 \\ Specification v\ifcsundef{rulesversion}{0.0.1}{\rulesversion}
     \end{center}
     \vfill
     \includegraphics[height=0.3\paperheight, right]{Assets/Pattern - PCB (Solid).png}
